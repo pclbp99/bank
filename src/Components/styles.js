@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 
     sidebarTitle: {
         fontSize: 24,
+        marginTop: 30,
         marginBottom: 20,
         color:'#fff',
         fontWeight:'700',

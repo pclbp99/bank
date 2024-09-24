@@ -14,7 +14,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#2D307D',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
-        height: '50%',
+        height: '100%',
+        padding: 60,
+    },
+
+    login_top_ios : {
+        backgroundColor: '#2D307D',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+        height: 400,
         padding: 60,
     },
 

@@ -145,12 +145,47 @@ const styles = StyleSheet.create({
 
     picker_container: {
         width:'30%',
-        borderWidth:1,
-        borderColor:'#e5e5e5',
-        borderRadius: 3,
-        overflow: 'hidden',
         height: 50,
     },
+
+    selectBox: {
+        paddingTop:12,
+        paddingBottom:12,
+        paddingRight:10,
+        paddingLeft: 10,
+        width:'100%',
+        borderWidth: 1,
+        borderColor: '#e5e5e5',
+        borderRadius: 5,
+        backgroundColor: '#fff',
+        height:50,
+      },
+
+      selectedValue: {
+        fontSize: 16,
+      },
+
+      modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+
+      modalContainer: {
+        width: '80%',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 20,
+      },
+
+      option: {
+        padding: 15,
+      },
+
+      optionText: {
+        fontSize: 16,
+      },
 
     main_btn:{
         width:'49%',
@@ -183,6 +218,7 @@ const styles = StyleSheet.create({
     },
 
     common_area: {
+        backgroundColor:'#fff',
         padding:20
     },
 
@@ -224,7 +260,6 @@ const styles = StyleSheet.create({
     transcation_img_box: {
         width:'100%',
         height: 300,
-        marginBottom:20,
     },
 
     transcation_img: {

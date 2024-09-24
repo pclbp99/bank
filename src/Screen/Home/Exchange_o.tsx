@@ -1,5 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
+
 import {
     SafeAreaView,
     ScrollView,
@@ -89,12 +91,11 @@ const Payment = () => {
                                     { color: amount ? '#000' : '#333' }
                                 ]}
                                 value={amount}
-                                onChangeText={(text) => {
-                                    const numericText = text.replace(/[^0-9]/g, '');
-                                    setAmount(numericText)
-                                }}
+                                onChangeText={(text) => setAmount(text)}
                                 onFocus={() => setActiveInput('amount')}
                                 keyboardType="numeric"
+                                editable={false}
+                                showSoftInputOnFocus={false}
                             />
                         </View>
                     </View>
@@ -127,7 +128,42 @@ const Payment = () => {
                         </View>
                     </View>
                 </View>
-            </View>
+
+                <View style={styles.keypad_container}>
+                        <View style={styles.keypad_row}>
+                            {[1, 2, 3].map(num => (
+                                <TouchableOpacity key={num} style={styles.keypad_button} onPress={() => handleNumberPress(num.toString())}>
+                                    <Text style={styles.keypad_text}>{num}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                        <View style={styles.keypad_row}>
+                            {[4, 5, 6].map(num => (
+                                <TouchableOpacity key={num} style={styles.keypad_button} onPress={() => handleNumberPress(num.toString())}>
+                                    <Text style={styles.keypad_text}>{num}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                        <View style={styles.keypad_row}>
+                            {[7, 8, 9].map(num => (
+                                <TouchableOpacity key={num} style={styles.keypad_button} onPress={() => handleNumberPress(num.toString())}>
+                                    <Text style={styles.keypad_text}>{num}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                        <View style={styles.keypad_row}>
+                            <TouchableOpacity style={styles.keypad_button} onPress={() => handleNumberPress('00')}>
+                                <Text style={styles.keypad_text}>00</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.keypad_button} onPress={() => handleNumberPress('0')}>
+                                <Text style={styles.keypad_text}>0</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.keypad_button} onPress={handleClear}>
+                                <Text style={styles.keypad_text}>X</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
           </View>
         </SafeAreaView>
       );

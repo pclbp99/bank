@@ -1,47 +1,55 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles.js';
 import CustomText from '../../CustomText.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSidebar }) => {
 
     const navigation = useNavigation(); 
+    const insets = useSafeAreaInsets();
+
+
+    const navigateTo = (screen) => {
+        navigation.navigate(screen);
+        toggleSidebar();
+    };
 
     return (
-        <View style={styles.sidebarContainer}>
+        <View style={[styles.sidebarContainer, { paddingTop: insets.top }]}>
 
             <CustomText style={styles.sidebarTitle}>MENU</CustomText>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+            <TouchableOpacity onPress={() => navigateTo('Main')}>
                 <CustomText style={styles.sidebarItem}>메인</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('AddCard')}>
+            <TouchableOpacity onPress={() => navigateTo('AddCard')}>
                 <CustomText style={styles.sidebarItem}>카드 추가</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Transcation')}>
+            <TouchableOpacity onPress={() => navigateTo('Transcation')}>
                 <CustomText style={styles.sidebarItem}>거래</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('TranscationList')}>
+            <TouchableOpacity onPress={() => navigateTo('TranscationList')}>
                 <CustomText style={styles.sidebarItem}>거래 목록</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
+            <TouchableOpacity onPress={() => navigateTo('Payment')}>
                 <CustomText style={styles.sidebarItem}>결제</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Exchange')}>
+            <TouchableOpacity onPress={() => navigateTo('Exchange')}>
                 <CustomText style={styles.sidebarItem}>환전</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Account')}>
+            <TouchableOpacity onPress={() => navigateTo('Account')}>
                 <CustomText style={styles.sidebarItem}>정보수정</CustomText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity onPress={() => navigateTo('Login')}>
                 <CustomText style={styles.sidebarItem}>로그아웃</CustomText>
             </TouchableOpacity>
 

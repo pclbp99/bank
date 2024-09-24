@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  Platform
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import CustomText from '../../../CustomText.tsx';
@@ -40,13 +42,26 @@ const Login = () => {
         <View style={styles.full_height}>
 
             {/* 로그인 상단 */}
-            <View style={styles.login_top}>
-                <CustomText style={styles.login_welcome}>WELCOME!</CustomText>
-                <CustomText style={styles.login_welcome_kr}>환영합니다!</CustomText>
-                <View style={styles.login_img_box}>
-                    <Image source={login_img}/>
+            {Platform.OS === 'android' ? (
+                <KeyboardAwareScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                    <View style={styles.login_top}>
+                        <CustomText style={styles.login_welcome}>WELCOME!</CustomText>
+                        <CustomText style={styles.login_welcome_kr}>환영합니다!</CustomText>
+                        <View style={styles.login_img_box}>
+                            <Image source={login_img}/>
+                        </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            ) : (
+                <View style={styles.login_top_ios}>
+                    <CustomText style={styles.login_welcome}>WELCOME!</CustomText>
+                    <CustomText style={styles.login_welcome_kr}>환영합니다!</CustomText>
+                    <View style={styles.login_img_box}>
+                        <Image source={login_img}/>
+                    </View>
                 </View>
-            </View>
+            )}            
+            
 
             {/* 로그인 영역 */}
             <View style={styles.login_area}>

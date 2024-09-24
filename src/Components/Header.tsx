@@ -67,7 +67,7 @@ const Header = (props) => {
             activeOpacity={1}
             onPress={toggleSidebar} 
           />
-          <Sidebar />
+          <Sidebar toggleSidebar={toggleSidebar} />
         </Modal>
       </SafeAreaView>
     );

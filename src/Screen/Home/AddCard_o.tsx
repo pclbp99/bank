@@ -1,4 +1,5 @@
 import React,{ useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
 
 import {
   SafeAreaView,
@@ -17,7 +18,6 @@ import Header from '../../Components/Header';
 import card from '../../Assets/Images/card.png';
 import styles from './styles.js';
 import CustomText from '../../../CustomText';
-import SelectBox from '../Home/SelectBox/SelectBox';
 
 
 const AddCard = () => {
@@ -50,18 +50,9 @@ const AddCard = () => {
       { label: 'France (+33)', value: '+33' },
     ];
 
-    const years = Array.from({ length: 20 }, (_, i) => ({
-      label: `${currentYear + i}`,
-      value: currentYear + i,
-    }));
-    const months = Array.from({ length: 12 }, (_, i) => ({
-      label: `${i + 1}`,
-      value: i + 1,
-    }));
-    const days = Array.from({ length: 31 }, (_, i) => ({
-      label: `${i + 1}`,
-      value: i + 1,
-    }));
+    const years = Array.from({ length: 150 }, (_, i) => currentYear - 100 + i);
+    const months = Array.from({ length: 12 }, (_, i) => i + 1);
+    const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
     const Registration = () => {
       if(!name || !cardnum || !cardpw || !phone){
@@ -108,11 +99,7 @@ const AddCard = () => {
                     placeholder='카드 번호를 입력해주세요'
                     style={styles.card_input}
                     value={cardnum}
-                    onChangeText={(text) => {
-                      const numericText = text.replace(/[^0-9]/g, '');
-                      setCardnum(numericText)
-                    }}
-                    
+                    onChangeText={(text) => setCardnum(text)}
                     keyboardType="numeric"
                   />
                 </View>
@@ -121,27 +108,39 @@ const AddCard = () => {
                   <CustomText style={styles.card_tit}>만료일</CustomText>
                   <View style={styles.sel_container}>
                     <View style={styles.picker_container}>
-                      <SelectBox
-                        options={years}
+                      <Picker
                         selectedValue={selectedYear}
-                        onValueChange={setSelectedYear}
-                      />
+                        style={styles.picker}
+                        onValueChange={(itemValue) => setSelectedYear(itemValue)}
+                      >
+                        {years.map((year, key) => (
+                          <Picker.Item key={key} label={`${year}`} value={year} />
+                        ))}
+                      </Picker>
                     </View>
 
                     <View style={styles.picker_container}>
-                      <SelectBox
-                        options={months}
+                      <Picker
                         selectedValue={selectedMonth}
-                        onValueChange={setSelectedMonth}
-                      />
+                        style={styles.picker}
+                        onValueChange={(itemValue) => setSelectedMonth(itemValue)}
+                      >
+                        {months.map((month, key) => (
+                          <Picker.Item key={key} label={`${month}`} value={month} />
+                        ))}
+                      </Picker>
                     </View>
 
                     <View style={styles.picker_container}>
-                      <SelectBox
-                        options={days}
+                      <Picker
                         selectedValue={selectedDay}
-                        onValueChange={setSelectedDay}
-                      />
+                        style={styles.picker}
+                        onValueChange={(itemValue) => setSelectedDay(itemValue)}
+                      >
+                        {days.map((day, key) => (
+                          <Picker.Item key={key} label={`${day}`} value={day} />
+                        ))}
+                      </Picker>
                     </View>
                   </View>
                 </View>
@@ -152,10 +151,7 @@ const AddCard = () => {
                     placeholder='카드 비밀번호를 입력해주세요'
                     style={styles.card_input} 
                     value={cardpw}
-                    onChangeText={(text) => {
-                      const numericText = text.replace(/[^0-9]/g, '');
-                      setCardpw(numericText)
-                    }}
+                    onChangeText={(text) => setCardpw(text)}
                     keyboardType="numeric"
                     secureTextEntry
                   />
@@ -165,20 +161,21 @@ const AddCard = () => {
                   <CustomText style={styles.card_tit}>연락처</CustomText>
                   <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                     <View style={styles.picker_container}>
-                      <SelectBox
-                        options={countryCodes}
+                      <Picker
                         selectedValue={selectedCountryCode}
-                        onValueChange={setSelectedCountryCode}
-                      />
+                        style={styles.picker}
+                        onValueChange={(itemValue) => setSelectedCountryCode(itemValue)}
+                      >
+                        {countryCodes.map((country) => (
+                          <Picker.Item key={country.value} label={country.label} value={country.value} />
+                        ))}
+                      </Picker>
                     </View>
                     <TextInput 
                       placeholder='연락처를 입력하세요'
                       style={[{width:'69%'}, styles.card_input]}
                       value={phone}
-                      onChangeText={(text) => {
-                        const numericText = text.replace(/[^0-9]/g, '');
-                        setPhone(numericText)
-                      }}
+                      onChangeText={(text) => setPhone(text)}
                       keyboardType="numeric"
                     />
                   </View>

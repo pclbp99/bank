@@ -19,53 +19,53 @@ const Tab01 = () => {
             id:'1',
             title:'Lorem Ipsum Company',
             history:'Received payment',
-            amount:'2,030.80'
+            amount:'2,030.80',
         },
         {
             id:'2',
             title:'Auctor Elit Ltd.',
             history:'Transfer money',
-            amount:'-450.00'
+            amount:'-450.00',
         },
         {
             id:'3',
             title:'Lectus Sit Amet est',
             history:'Gas&electricity payment',
-            amount:'-239.50'
+            amount:'-239.50',
         },
         {
             id:'4',
             title:'Congue Quisque',
             history:'Withdraw money',
-            amount:'-1,500.00'
+            amount:'-1,500.00',
         },
         {
             id:'5',
             title:'Lorem Ipsum Company',
             history:'Received payment',
-            amount:'2,030.80'
+            amount:'2,030.80',
         },
         {
             id:'6',
             title:'Auctor Elit Ltd.',
             history:'Transfer money',
-            amount:'-450.00'
+            amount:'-450.00',
         },
         {
             id:'7',
             title:'Lectus Sit Amet est',
             history:'Gas&electricity payment',
-            amount:'-239.50'
+            amount:'-239.50',
         },
         {
             id:'8',
             title:'Congue Quisque',
             history:'Withdraw money',
-            amount:'-1,500.00'
+            amount:'-1,500.00',
         },
     ];
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
+    const startIndex = (currentPage - 1) * itemsPerPage; 
     const endIndex = startIndex + itemsPerPage;
     const currentTransactions = transactionData.slice(startIndex, endIndex);
 

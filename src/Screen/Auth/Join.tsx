@@ -26,12 +26,29 @@ const Main = () => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+    const [isEmailValid, setIsEmailValid] = useState(true);
 
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const mailCheck = (text) => {
+      setId(text);
+      if (emailRegex.test(text)) {
+        setIsEmailValid(true);
+      } else {
+        setIsEmailValid(false);
+      }
+    };
+
 
     const Signup = () => {
         if (!name || !account || !id || !password) {
           Alert.alert('입력 오류', '모든 내용을 입력해주세요.');
+          return;
+        }
+
+        if(!isEmailValid){
+          Alert.alert('이메일 확인', '이메일 형식과 일치하지 않습니다.');
           return;
         }
     
@@ -73,7 +90,11 @@ const Main = () => {
                         style={styles.login_input}
                         placeholder='은행계좌를 - 없이 입력해주세요'
                         value={account}
-                        onChangeText={(text) => setAccount(text)}
+                        onChangeText={(text) => {
+                          const numericText = text.replace(/[^0-9]/g, '');
+                          setAccount(numericText);
+                      }}
+                        keyboardType="numeric"
                     />
                 </View>
                 <View style={styles.join_each}>
@@ -82,8 +103,9 @@ const Main = () => {
                         style={styles.login_input}
                         placeholder='로그인에 사용할 이메일을 입력해주세요'
                         value={id}
-                        onChangeText={(text) => setId(text)}
+                        onChangeText={mailCheck}
                     />
+                    {!isEmailValid && <CustomText style={styles.pw_info}>이메일 형식을 확인해주세요</CustomText>}
                 </View>
                 <View style={styles.join_each}>
                     <CustomText style={styles.join_subtit}>비밀번호</CustomText>

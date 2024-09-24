@@ -14,6 +14,7 @@ import {
   import { useNavigation } from '@react-navigation/native';
 
   import CustomText from '../../../CustomText.tsx';
+  import SelectBox from '../Home/SelectBox/SelectBox';
   import Header from '../../Components/Header';
   import styles from './styles.js';
   import transcation_img from '../../Assets/Images/transcation_img.png';
@@ -24,7 +25,7 @@ import {
 
     const [accountWithdraw, setAdccountWithdraw] = useState('');
     const [accountCode, setAccountCode] = useState('');
-    const [unit, setUnit] = useState('');
+    const [unit, setUnit] = useState('$');
     const [amount, setAmount] = useState('');
     const [memo, setMemo] = useState('');
 
@@ -58,7 +59,7 @@ import {
                     </View>
                 </View>
 
-                <View style={styles.common_area}>
+                <View style={[styles.common_area, {paddingTop:30}]}>
                     <View style={styles.card_each}>
                         <CustomText style={styles.card_tit}>출금할 계좌</CustomText>
                         <TextInput
@@ -73,15 +74,11 @@ import {
                     <View style={styles.card_each}>
                         <CustomText style={styles.card_tit}>입금할 계좌</CustomText>
                         <View style={[styles.picker_container, {width:'100%'}]}>
-                            <Picker
+                            <SelectBox
+                                options={accountLists}
                                 selectedValue={accountCode}
-                                style={styles.picker}
-                                onValueChange={(itemValue) => setAccountCode(itemValue)}
-                            >
-                                {accountLists.map((account) => (
-                                <Picker.Item key={account.value} label={account.label} value={account.value} />
-                                ))}
-                            </Picker>
+                                onValueChange={setAccountCode}
+                            />
                         </View>
                     </View>
 
@@ -89,15 +86,11 @@ import {
                         <CustomText style={styles.card_tit}>금액</CustomText>
                         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                             <View style={styles.picker_container}>
-                            <Picker
-                                selectedValue={unit}
-                                style={[styles.picker, { height: 50 }]} 
-                                onValueChange={(itemValue) => setUnit(itemValue)}
-                            >
-                                {currencyUnit.map((unit) => (
-                                <Picker.Item key={unit.value} label={unit.label} value={unit.value} />
-                                ))}
-                            </Picker>
+                                <SelectBox
+                                    options={currencyUnit}
+                                    selectedValue={unit}
+                                    onValueChange={setUnit}
+                                />
                             </View>
                             <TextInput 
                                 placeholder='금액 입력'
